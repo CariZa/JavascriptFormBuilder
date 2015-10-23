@@ -15,6 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'formBuilder.js',
       'test/unit/*Spec.js',
       'test/unit/*Spec**/.js',
       'test/unit/**/*Spec/.js',
