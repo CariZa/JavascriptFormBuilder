@@ -3,6 +3,12 @@
 
 var formBuilder = (function() {
 
+    var form_fields = [];
+
+    var settings = {
+      parent : 'html'
+    };
+
     var valid_types = [
         'input'
     ];
@@ -10,6 +16,11 @@ var formBuilder = (function() {
     function DOMManipulator() {
 
       var api = {};
+
+      api.clear = function(id) {
+        var element = api.getElementById(id);
+        element.innerHTML = '';
+      };
 
       api.createElement = function(type) {
           return document.createElement(type);
@@ -23,7 +34,8 @@ var formBuilder = (function() {
           addTo.appendChild(element);
       };
 
-      api.appendChildren = function(list, addTo) {
+      api.appendChildren = function(list, id) {
+          var addTo = api.getElementById(id);
           for(var i = 0; i < list.length; i++){
               api.appendChild(list[i], addTo);
           }
@@ -78,44 +90,52 @@ var formBuilder = (function() {
       var api = {};
 
       api.start = function(list, id) {
-            var container = DOMManipulator().getElementById(id);
-            var formElements = DOMCreator(DOMManipulator).buildElements(list, container);
-            DOMManipulator().appendChildren(formElements, container);
+            //var container = DOMManipulator().getElementById(id);
+            var formElements = DOMCreator(DOMManipulator).buildElements(list, id);
+            DOMManipulator().clear(id);
+            DOMManipulator().appendChildren(formElements, id);
       };
 
       return api;
 
     })();
 
-    
+
+
+    var Add = (function() {
+
+        var api = {};
+
+        api.addInput = function() {
+          form_fields.push({
+              type : 'input',
+              attributes : {
+                  name: 'Name',
+                  value: 'Insert a name'
+              }
+            });
+        };
+
+        return api;
+
+    })();
+
+
 
     return {
-      start : function(list, id) {
-        FormCreator.start(list, id)
+      addInput : function() {
+        Add.addInput();
+        FormCreator.start(form_fields, settings.parent);
+        return formBuilder;
+      },
+      addParent : function(id) {
+        settings.parent = id;
+        return formBuilder;
       }
     };
 
 })();
 
-var form_fields = [
-      {
-            type : 'input',
-            attributes : {
-                name: 'Name',
-                value: 'Insert a name'
-            }
-        },{
-            type : 'input',
-            attributes : {
-                name: 'Surname',
-                value: 'Insert a surname'
-            }
-        }
-    ];
 
 
-formBuilder.start(form_fields, 'form_wrapper');
-
-formBuilder.start([{type:'input'}], 'form_wrapper');
-
-formBuilder.start([{type: 'invalidtype'}], 'form_wrapper');
+formBuilder.addParent('form_wrapper').addInput().addInput().addInput();
