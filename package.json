@@ -7,6 +7,7 @@
     "karma": "^0.13.12"
   },
   "devDependencies": {
+    "bootstrap": "^3.3.5",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.12",
     "karma-chrome-launcher": "^0.2.1",
