@@ -1,0 +1,103 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <style>
+
+        pre {
+            white-space: pre-wrap;       /* CSS 3 */
+            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+        }
+
+        </style>
+
+    </head>
+    <body>
+
+
+
+    <div class="container">
+
+      <h1>Plain Javascript Form Builder</h2>
+      <div class="well">
+        <p><strong>Beta version</strong></p>
+      </div>
+
+        <div class="row">
+
+          <div class="col-md-4">
+              <h2>Build</h2>
+
+              <h4>Add an input field</h4>
+              <div class="input-group">
+                  <input type="text" id="inputLabel"  class="form-control" placeholder="Add the label text" />
+
+                  <span class="input-group-btn">
+                      <button onClick="addInput(form1, 'inputLabel')" class="btn btn-primary">Add input</button>
+                  </span>
+              </div>
+
+              <h4>Add a dropbox</h4>
+              <script>
+                var selections = [];
+              </script>
+              <div class="" id="dropbox">
+                  <div class="form-group">
+                    <label>Value</label>
+                    <input type="text" id="selectionValue"  class="form-control" placeholder="Add the value" />
+                  </div>
+
+                  <div class="form-group">
+                      <button onClick="addSelection(selections, 'selectionValue')" class="btn btn-primary">Add selection</button>
+                  </div>
+
+                  <div id="dropbox_wrapper">
+                    <ul class="list-group" id="displayList">
+                    </ul>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" id="selectionLabelValue"  class="form-control" placeholder="Add the label value" />
+              </div>
+              <div class="form-group">
+                  <button onClick="addSelect(form1, selections, 'selectionLabelValue')" class="btn btn-primary">Add select</button>
+              </div>
+
+          </div>
+
+          <div class="col-md-4">
+            <h3>Your form</h3>
+            <form id="form_wrapper"></form>
+          </div>
+
+          <div class="col-md-4">
+            <h3>Your html</h3>
+            <pre id="displayHTML"></pre>
+          </div>
+
+        </div>
+
+    </div>
+
+        <script src="formBuilder.js"></script>
+
+        <script>
+
+          var form1 = formBuilder('form_wrapper');
+          var dropbox = formBuilder('dropbox_wrapper');
+
+        </script>
+
+    </body>
+</html>

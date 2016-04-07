@@ -1,7 +1,7 @@
 //VERSION 0.01
 //Added in the basic concept
 
-var formBuilder = (function() {
+var formBuilder = function(id) {
 
     var instance;
 
@@ -10,7 +10,8 @@ var formBuilder = (function() {
     var settings = {
       'divClass' : "form-group",
       'inputClass' : "form-control",
-      'selectClass' : "form-control"
+      'selectClass' : "form-control",
+      'parent' : id
     };
 
     var valid_types = [
@@ -206,13 +207,14 @@ var formBuilder = (function() {
           form_fields.push({
               type: 'select',
               attributes : {
-                name : 'Name',
-                selected : '',
+                name : data.name,
+                selected : data.selected, //NB: TODO add this feature
                 class: data.class || settings.selectClass
               },
               label: data.label || false,
               options : configOpt.createOptions(list)
           });
+          debugger;
         };
 
         return api;
@@ -246,14 +248,14 @@ var formBuilder = (function() {
                   Add.addInput(options);
                   return this.init();
                 },
-                addSelect : function(list) {
-                  Add.addSelect(list);
+                addSelect : function(list, data) {
+                  Add.addSelect(list, data);
                   return this.init();
-                },
-                addParent : function(id) {
-                  settings.parent = id;
-                  return instance;
                 }
+                // addParent : function(id) {
+                //   settings.parent = id;
+                //   return instance;
+                // }
           };
 
     }
@@ -268,34 +270,59 @@ var formBuilder = (function() {
 
     return init();
 
-})();
+};
 
 
 
 
 
-function addInput(form) {
+function addInput(form, inputId) {
 
   var data = {
     name: '',
-    value: "",
     class: '',
-    label: document.getElementById('labelValue').value
+    label: document.getElementById(inputId).value
   };
 
   form.addInput(data);
+  document.getElementById(inputId).value = '';
+
+  var text = document.createTextNode(document.getElementById('form_wrapper').innerHTML);
+  var el = document.getElementById('displayHTML');
+  el.appendChild(text);
+
 
 }
 
-function addSelect() {
+function addSelection(list, valueInputId, textInputId) {
+
+  var selection = document.getElementById(valueInputId).value;
+
+  list.push(selection);
+
+  var listContainer = document.getElementById('displayList');
+  listContainer.innerHTML = '';
+
+  for (var i = 0; i < list.length; i++) {
+    var li = document.createElement('li');
+    li.setAttribute('class','list-group-item');
+    li.innerHTML = list[i];
+    listContainer.appendChild(li);
+  }
+
+  return list;
+
+}
+
+function addSelect(form, list, labelInputId) {
 
   var data = {
     name: '',
     value: '',
     class: '',
-    label: ''
+    label: document.getElementById(labelInputId).value
   };
 
-  form.addSelect();
+  form.addSelect(list, data);
 
 }
