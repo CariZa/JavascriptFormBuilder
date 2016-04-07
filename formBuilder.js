@@ -29,26 +29,14 @@ var formBuilder = (function() {
       };
 
       api.createInput = function(data) {
-        //return document.createElement('input');
-        //var div = document.createElement('div');
-          var input = document.createElement('input');
-        //if (settings.inputClass) {
-          //input.setAttribute("class", settings.inputClass);
-
-          //if (data.)
-        //}
-        //div.appendChild(input);
-        //return div;
-        return input;
+        return document.createElement('input');
       };
 
       api.wrapFormElements = function(list) {
         var elements = [];
         for(var i = 0; i < list.length; i++){
             var div = document.createElement('div');
-            //if (settings.divClass) {
-              div.setAttribute("class", settings.divClass);
-            //}
+            div.setAttribute("class", settings.divClass);
             div.appendChild(list[i]);
             elements.push(div);
         }
@@ -57,17 +45,10 @@ var formBuilder = (function() {
 
       api.createSelect = function(data) {
         var select = document.createElement('select');
-        //var div = document.createElement('div');
         if (data.options) {
           var options = api.buildElements(data.options);
-          //var options = api.wrapFormElements(options);
           api.appendChildren(options, select);
         }
-        //div.appendChild(select);
-        //return div;
-        //if (settings.selectClass) {
-        //  select.setAttribute("class", settings.selectClass);
-        //}
         return select;
       };
 
@@ -96,10 +77,6 @@ var formBuilder = (function() {
       api.getElementById = function(id) {
           return document.getElementById(id);
       };
-
-    //  api.appendChild = function(element, addTo) {
-      //    addTo.appendChild(element);
-    //  };
 
       api.appendChildren = function(list, addTo) {
           for(var i = 0; i < list.length; i++){
@@ -281,8 +258,6 @@ var formBuilder = (function() {
 
     }
 
-
-
     //Singleton
     function init() {
       if (!instance) {
@@ -294,3 +269,33 @@ var formBuilder = (function() {
     return init();
 
 })();
+
+
+
+
+
+function addInput(form) {
+
+  var data = {
+    name: '',
+    value: "",
+    class: '',
+    label: document.getElementById('labelValue').value
+  };
+
+  form.addInput(data);
+
+}
+
+function addSelect() {
+
+  var data = {
+    name: '',
+    value: '',
+    class: '',
+    label: ''
+  };
+
+  form.addSelect();
+
+}
