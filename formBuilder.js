@@ -20,6 +20,10 @@ var formBuilder = function(id) {
         'option'
     ];
 
+    //NB: this is doing too much, seperate - think Open/Closed principle / Liskov's
+    // Perhaps have a form class, which pulls in form element classes
+    // Form -> Input, Select, Textare, Checkbox, Radio etc.
+
     this.dom = (function () {
 
       var api = {};
@@ -290,7 +294,6 @@ function addInput(form, inputId) {
   var text = document.createTextNode(document.getElementById('form_wrapper').innerHTML);
   var el = document.getElementById('displayHTML');
   el.appendChild(text);
-
 
 }
 

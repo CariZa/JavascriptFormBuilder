@@ -1,5 +1,5 @@
 {
-  "name": "JavascriptFormBuilder",
+  "name": "javascript_form_builder",
   "version": "0.0.1",
   "description": "Beta version of a javascript only form builder.",
   "main": "formBuilder.js",
@@ -12,7 +12,8 @@
     "karma": "^0.13.12",
     "karma-chrome-launcher": "^0.2.1",
     "karma-firefox-launcher": "^0.1.6",
-    "karma-jasmine": "^0.3.6",
+    "karma-html-reporter": "^0.2.7",
+    "karma-jasmine": "^0.3.8",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-spec-reporter": "0.0.20",
     "phantomjs": "^1.9.18"
@@ -22,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CariZa/JavascriptFormBuilder.git"
+    "url": "git+https://github.com/CariZa/JavascriptFormBuilder.git"
   },
   "keywords": [
     "form",
@@ -33,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/CariZa/JavascriptFormBuilder/issues"
   },
-  "homepage": "https://github.com/CariZa/JavascriptFormBuilder"
+  "homepage": "https://github.com/CariZa/JavascriptFormBuilder",
+  "directories": {
+    "test": "test"
+  }
 }
