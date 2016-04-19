@@ -59,7 +59,7 @@
                   </div>
 
                   <div class="form-group">
-                      <button onClick="addSelection(selections, 'selectionValue')" class="btn btn-primary">Add selection</button>
+                      <button onClick="addSelection(selections, 'selectionValue');" class="btn btn-primary">Add selection</button>
                   </div>
 
                   <div id="dropbox_wrapper">
@@ -74,7 +74,7 @@
                   <input type="text" id="selectionLabelValue"  class="form-control" placeholder="Add the label value" />
               </div>
               <div class="form-group">
-                  <button onClick="addSelect(form1, selections, 'selectionLabelValue')" class="btn btn-primary">Add select</button>
+                  <button onClick="addSelect(form1, selections, 'selectionLabelValue'); selections = [];" class="btn btn-primary">Add select</button>
               </div>
 
           </div>
@@ -97,8 +97,67 @@
 
         <script>
 
+        function addInput(form, inputId) {
+
+            var data = {
+                name: '',
+                class: '',
+                label: document.getElementById(inputId).value
+            };
+
+            form.add("input",data);
+            document.getElementById(inputId).value = '';
+
+            var text = document.createTextNode(document.getElementById('form_wrapper').innerHTML);
+            var el = document.getElementById('displayHTML');
+            el.appendChild(text);
+
+        }
+
+        function addSelection(list, valueInputId, textInputId) {
+
+          var selection = document.getElementById(valueInputId).value;
+
+          list.push(selection);
+
+          var listContainer = document.getElementById('displayList');
+          listContainer.innerHTML = '';
+
+          for (var i = 0; i < list.length; i++) {
+            var li = document.createElement('li');
+            li.setAttribute('class','list-group-item');
+            li.innerHTML = list[i];
+            listContainer.appendChild(li);
+          }
+
+          document.getElementById("selectionValue").value = '';
+
+          return list;
+
+        }
+
+        function addSelect(form, list, labelInputId) {
+
+          var options = JSON.parse(JSON.stringify( list ));
+
+          var data = {
+            name: '',
+            value: '',
+            class: '',
+            label: document.getElementById(labelInputId).value,
+            options:options
+          };
+
+          document.getElementById("selectionLabelValue").value = '';
+          document.getElementById("displayList").innerHTML = '';
+
+          form.add("select", data);
+
+        }
+        
+
           var form1 = formBuilder('form_wrapper');
-          var dropbox = formBuilder('dropbox_wrapper');
+        //   var dropbox = formBuilder('dropbox_wrapper');
 
         </script>
 
